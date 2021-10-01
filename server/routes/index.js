@@ -9,5 +9,5 @@ module.exports = (app) => {
   app.get('/api/products', productsController.list);
   app.get('/api/products/:id', productsController.findById);
   app.put('/api/products/:id/update', productsController.update);
-  app.delete('/api/products/:id', productsController.destory);
+  app.delete('/api/products/:id', productsController.des);
 };
