@@ -1,17 +1,21 @@
 const AdminBro = require('admin-bro');
-// const adminBro = new AdminBro({
-//   rootPath: '/',
-// });
 
 
-const { User, Product } = require('../server/models');
-const { UserResource, ProductResource } = require('./resources');
+const {
+ // User,
+  Product
+} = require('../server/models');
+
+const {
+//  UserResource,
+  ProductResource
+} = require('./resources');
 
 const sidebarGroups = {
-  user: {
-    name: 'User Management',
-    icon: 'User',
-  },
+  // user: {
+  //   name: 'User Management',
+  //   icon: 'User',
+  // },
   product: {
     name: 'Product Management',
     icon: 'Product'
@@ -20,26 +24,28 @@ const sidebarGroups = {
 
 
 const adminBro = new AdminBro({
-   rootPath: '/admin',
-   loginPath: '/admin/login',
-   resources:  [{
-    resource: User,
-    options: {
-      ...UserResource,
-      parent: sidebarGroups.user,
+  rootPath: '/admin',
+  loginPath: '/admin/login',
+  resources: [
+    // {
+    //   resource: User,
+    //   options: {
+    //     ...UserResource,
+    //     parent: sidebarGroups.user,
+    //   }
+    // },
+    {
+      resource: Product,
+      options: {
+        ...ProductResource,
+        parent: sidebarGroups.product,
+      }
     }
-  }, {
-    resource: Product,
-    options: {
-      ...ProductResource,
-      parent: sidebarGroups.product,
-    }
+  ],
+  branding: {
+    companyName: 'Admin module',
+    softwareBrothers: false,
   }
-],
-   branding: {
-     companyName: 'AdminBro Tutorial',
-     softwareBrothers: false,
-   }
 });
 
 module.exports = adminBro;

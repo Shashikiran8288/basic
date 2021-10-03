@@ -1,13 +1,26 @@
 const productsController = require('../controllers').products;
 
-module.exports = (app) => {
-  app.get('/api', (req, res) => res.status(200).send({
-    message: 'Welcome to the Todos API!',
-  }));
+const usersController = require('../controllers').users;
 
-  app.post('/api/products', productsController.create);
+
+
+module.exports = (app) => {
+  
   app.get('/api/products', productsController.list);
-  app.get('/api/products/:id', productsController.findById);
-  app.put('/api/products/:id/update', productsController.update);
-  app.delete('/api/products/:id', productsController.des);
+
+  app.post('/api/login', usersController.login);
+ 
+
+  app.get('/', (req, res) => {
+    var path = require('path');
+    return res.sendFile(path.join(__dirname, "../static/login.html"));
+  });
+
+
+
+
+
+  
+
+ 
 };
