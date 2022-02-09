@@ -11,6 +11,7 @@ const create = function(req, res){
         guage: data.guage,
         weight_based_on_guage: data.weight_based_on_guage,
         rate: data.rate,
+        product_type: data.product_type
       })
       .then(product => res.status(201).send(product))
       .catch(error => res.status(400).send(error.toString()));
@@ -22,7 +23,7 @@ const list = function (req, res) {
     searchParams = [], attributes = [
       ['id', 'productId'],
       ['name', 'product'],
-      ['type', 'productType'], 'weight', 'guage', 'size', ['rate', 'price']
+      ['product_type', 'productType'], 'weight', 'guage', 'size', ['rate', 'price']
     ];
   let whereClause = {
     where: {},

@@ -14,6 +14,9 @@ module.exports = {
       size: {
         type: Sequelize.STRING
       },
+      product_type: {
+        type: Sequelize.STRING
+      },
       guage: {
         type: Sequelize.STRING
       },
