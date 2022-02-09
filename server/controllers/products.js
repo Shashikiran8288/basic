@@ -69,8 +69,8 @@ const list = function (req, res) {
 
 
   return Product
-    //.findAndCountAll(whereClause)
-    .findAndCountAll()
+    .findAndCountAll(whereClause)
+    //.findAndCountAll()
     .then(products => res.status(200).send(products))
     .catch(error => res.status(400).send(error.toString()));
 }
