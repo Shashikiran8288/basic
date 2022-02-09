@@ -1,5 +1,6 @@
 const Product = require('../models').Product;
-//const { Op } = require("sequelize");
+
+const { Sequelize } = require('sequelize').Sequelize;
 
 
 const create = function(req, res){
@@ -23,7 +24,7 @@ const list = function (req, res) {
     searchParams = [], attributes = [
       ['id', 'productId'],
       ['name', 'product'],
-      ['product_type', 'productType'], ['weight_based_on_guage','weight'], 'guage', 'size', ['rate', 'price']
+      ['product_type', 'productType'], 'weight_based_on_guage', 'guage', 'size', ['rate', 'price']
     ];
   let whereClause = {
     where: {},
@@ -32,46 +33,45 @@ const list = function (req, res) {
     limit: limit
   };
 
-  // if (req.query.search) {
+  if (req.query.search) {
 
-  //   req.query.search = JSON.parse(req.query.search)
+    req.query.search = JSON.parse(req.query.search)
 
-  //   if (req.query.search.productId) searchParams.push({
-  //     'id': {
-  //       [Op.eq]: req.query.search.productId
-  //     }
-  //   });
-  //   if (req.query.search.product) searchParams.push({
-  //     'name': {
-  //       [Op.iLike]: '%' + req.query.search.product + '%'
-  //     }
-  //   });
-  //   if (req.query.search.productType) searchParams.push({
-  //     'type': {
-  //       [Op.iLike]: '%' + req.query.search.productType + '%'
-  //     }
-  //   });
-  //   if (req.query.search.guage) searchParams.push({
-  //     'guage': {
-  //       [Op.iLike]: '%' + req.query.search.guage + '%'
-  //     }
-  //   });
-  //   if (req.query.search.size) searchParams.push({
-  //     'size': {
-  //       [Op.iLike]: '%' + req.query.search.size + '%'
-  //     }
-  //   });
+    if (req.query.search.productId) searchParams.push({
+      'id': {
+        [Sequelize.Op.eq]: req.query.search.productId
+      }
+    });
+    if (req.query.search.product) searchParams.push({
+      'name': {
+        [Sequelize.Op.iLike]: '%' + req.query.search.product + '%'
+      }
+    });
+    if (req.query.search.productType) searchParams.push({
+      'product_type': {
+        [Sequelize.Op.iLike]: '%' + req.query.search.productType + '%'
+      }
+    });
+    if (req.query.search.guage) searchParams.push({
+      'guage': {
+        [Sequelize.Op.iLike]: '%' + req.query.search.guage + '%'
+      }
+    });
+    if (req.query.search.size) searchParams.push({
+      'size': {
+        [Sequelize.Op.iLike]: '%' + req.query.search.size + '%'
+      }
+    });
 
-  //   whereClause.where = ((searchParams.length > 1) ? {
-  //     [Op.or]: searchParams
-  //   } : searchParams[0]);
+    whereClause.where = ((searchParams.length > 1) ? {
+      [Sequelize.Op.and]: searchParams
+    } : searchParams[0]);
 
-  // }
+  }
 
 
   return Product
     .findAndCountAll(whereClause)
-    //.findAndCountAll()
     .then(products => res.status(200).send(products))
     .catch(error => res.status(400).send(error.toString()));
 }
