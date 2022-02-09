@@ -1,6 +1,5 @@
 const Product = require('../models').Product;
-const { Op } = require("sequelize");
-
+const Op = require("sequelize").Op;
 
 const create = function(req, res){
     let data = req.body;
@@ -67,19 +66,12 @@ const list = function (req, res) {
 
   }
 
-
   return Product
     .findAndCountAll(whereClause)
     .then(products => res.status(200).send(products))
     .catch(error => res.status(400).send(error.toString()));
 }
 
-// const list = function (req, res){
-//     return Product
-//       .findAll()
-//       .then(products => res.status(200).send(products))
-//       .catch(error => res.status(400).send(error));
-// }
 
 const findById = function (req, res){
     return Product
