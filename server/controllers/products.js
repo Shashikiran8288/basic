@@ -1,5 +1,5 @@
 const Product = require('../models').Product;
-const { Sequelize, Op } = require("sequelize");
+const Op = require("sequelize").Op;
 
 const create = function(req, res){
     let data = req.body;
