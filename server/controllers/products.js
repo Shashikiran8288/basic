@@ -101,5 +101,5 @@ module.exports ={
     list,
     findById,
     update,
-    destory
+    destory,
 }

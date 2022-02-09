@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     size: DataTypes.STRING,
     guage: DataTypes.STRING,
-    weight_based_on_guage: DataTypes.INTEGER,
+    weight_based_on_guage: DataTypes.FLOAT,
     rate: DataTypes.FLOAT,
   }, {
     sequelize,
