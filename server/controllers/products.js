@@ -23,7 +23,7 @@ const list = function (req, res) {
     searchParams = [], attributes = [
       ['id', 'productId'],
       ['name', 'product'],
-      ['product_type', 'productType'], 'weight', 'guage', 'size', ['rate', 'price']
+      ['product_type', 'productType'], ['weight_based_on_guage','weight'], 'guage', 'size', ['rate', 'price']
     ];
   let whereClause = {
     where: {},
