@@ -19,66 +19,20 @@ const create = function(req, res){
 }
 
 const list = function (req, res) {
-  let limit = req.query.limit ? req.query.limit : 10,
-    offset = (req.query.offset ? req.query.offset : 0),
-    searchParams = [], attributes = [
-      ['id', 'productId'],
-      ['name', 'product'],
-      ['product_type', 'productType'], 'weight_based_on_guage', 'guage', 'size', ['rate', 'price']
-    ];
-  let whereClause = {
-    where: {},
-    attributes: attributes,
-    offset: offset,
-    limit: limit
-  };
-
-  if (req.query.search) {
-
-    req.query.search = JSON.parse(req.query.search)
-
-    if (req.query.search.productId) searchParams.push({
-      'id': {
-        [Sequelize.Op.eq]: req.query.search.productId
-      }
-    });
-    if (req.query.search.product) searchParams.push({
-      'name': {
-        [Sequelize.Op.iLike]: '%' + req.query.search.product + '%'
-      }
-    });
-    if (req.query.search.productType) searchParams.push({
-      'product_type': {
-        [Sequelize.Op.iLike]: '%' + req.query.search.productType + '%'
-      }
-    });
-    if (req.query.search.guage) searchParams.push({
-      'guage': {
-        [Sequelize.Op.iLike]: '%' + req.query.search.guage + '%'
-      }
-    });
-    if (req.query.search.size) searchParams.push({
-      'size': {
-        [Sequelize.Op.iLike]: '%' + req.query.search.size + '%'
-      }
-    });
-
-    whereClause.where = ((searchParams.length > 1) ? {
-      [Sequelize.Op.and]: searchParams
-    } : searchParams[0]);
-
-  }
-
-
-  return Product
-    .findAndCountAll(whereClause)
-    .then(products => res.status(200).send(products))
+  
+    let totalCount = 0;
+    Product.count()
+    .then((count)=>{
+      totalCount = count;
+      return Product.scope({ method: ['search', req.query] }).findAll()
+    })
+    .then(result => res.status(200).send({ count: totalCount, rows: result }))
     .catch(error => res.status(400).send(error.toString()));
 }
 
 const findById = function (req, res){
     return Product
-      .findOne({ where: {id: req.params.id} })
+      .scope({ method: ['byId', req.params.id] }).findAll()
       .then(product => res.status(200).send(product))
       .catch(error => res.status(400).send(error));
 }
