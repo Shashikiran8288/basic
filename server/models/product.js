@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     return { 
-      where: (searchParams.length > 1 ? { [Op.and]: searchParams } : {} ),
+      where: (searchParams.length > 0 ? { [Op.and]: searchParams } : {} ),
       attributes: attributes,
       offset: offset,
       limit: limit
