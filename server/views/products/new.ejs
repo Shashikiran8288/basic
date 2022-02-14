@@ -1,0 +1,53 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+
+
+
+  <h1> New Product </h1>
+  <form action="/api/products" method="POST">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" placeholder="Enter Name" required/>
+    </div>
+    <div>
+      <label for="product_type">Product Type</label>
+
+      <select name="product_type" placeholder="Enter Product Type" required>
+        <option value="" selected >Select Product Type</option>
+        <option value="rod">rod</option>
+        <option value="non-rod">non-rod</option>
+
+      </select>
+
+    </div>
+
+    <div>
+      <label for="size">Size</label>
+      <input type="text" name="size" placeholder="Enter Size" required/>
+    </div>
+
+    <div>
+      <label for="name">Guage</label>
+      <input type="text" name="guage" placeholder="Enter Guage" required/>
+    </div>
+    <div>
+      <label for="weight_based_on_guage">Weight</label>
+      <input type="text" name="weight_based_on_guage" placeholder="Enter Weight  based on Guage" required/>
+    </div>
+
+    <div>
+      <label for="name">Rate</label>
+      <input type="text" name="rate" placeholder="Enter Rate" required/>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+  </form>
+
+</main>
+
+</body> 
+</html>

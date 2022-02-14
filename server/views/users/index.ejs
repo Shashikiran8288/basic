@@ -1,0 +1,28 @@
+
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+  <div class="ui segment">
+    <input type="text" id="myInput" onkeyup="searchByfirstColumn()" placeholder="Search for names.." title="Type in a name">
+    <table id="myTable">
+      <tr class="header">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      <% for(let count = 0; count < users.length; count++ ){ %>
+      <tr>
+        <td> <%= users[count]['first_name']  %> </td>
+        <td> <%= users[count]['last_name']  %> </td>
+        <td> <%= users[count]['email']  %> </td>
+        <td> <a  href="/api/users/<%= users[count].dataValues['id'] %>/drop">delete</a>  </td>
+      </tr>
+      <% } %>
+    </table>
+
+  </div>
+</main>
+</body> 
+</html>

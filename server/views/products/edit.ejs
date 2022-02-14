@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+
+
+  <h1> Edit Product </h1>
+  <form action="/api/products/<%=product.dataValues['productId'] %>/update" method="post">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" placeholder="Enter Name" required value="<%= product.dataValues['product'] %>"/>
+    </div>
+    <div>
+      <label for="product_type">Product Type</label>
+
+      <select name="product_type" placeholder="Enter Product Type" required>
+
+        <option value="rod" selected="<%= product.dataValues['product']? true : null %>"  >rod</option>
+        <option value="non-rod" selected="<%= product.dataValues['product']? true : null %>" >non-rod</option>
+
+      </select>
+
+    </div>
+
+    <div>
+      <label for="size">Size</label>
+      <input type="text" name="size" placeholder="Enter Size" value="<%= product.dataValues['size'] %>" required/>
+    </div>
+
+    <div>
+      <label for="name">Guage</label>
+      <input type="text" name="guage" placeholder="Enter Guage" value="<%= product.dataValues['guage'] %>" required/>
+    </div>
+    <div>
+      <label for="weight_based_on_guage">Weight</label>
+      <input type="text" name="weight_based_on_guage" placeholder="Enter Weight  based on Guage" value="<%= product.dataValues['weight_based_on_guage'] %>" required/>
+    </div>
+
+    <div>
+      <label for="name">Rate</label>
+      <input type="text" name="rate" placeholder="Enter Rate" value="<%= product.dataValues['price'] %>" required/>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+  </form>
+
+</main>
+
+</body> 
+</html>

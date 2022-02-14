@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
   }));
 
   Product.addScope('search', (query) => {
-    var searchParams = [], limit = query.limit ? query.limit : 10,
+    var searchParams = [], limit = query.limit ? query.limit : 1000,
     offset = (query.offset ? query.offset : 0);
 
     if(query &&  query.search){

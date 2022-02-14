@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+
+
+
+  <h1> New Product </h1>
+  <form action="/api/users" method="POST">
+    <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" placeholder="Enter Email" required/>
+    </div>
+
+
+    <div>
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" placeholder="Enter First Name" required/>
+    </div>
+
+    <div>
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" placeholder="Enter Last Name" required/>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="text" name="password" placeholder="Enter Password" required/>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+
+  </form>
+
+</main>
+
+</body> 
+</html>
