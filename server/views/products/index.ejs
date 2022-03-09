@@ -1,9 +1,7 @@
 <%- include('../partials/header.ejs') %>
-<div style="margin: 1%;"></div>
+<div style="margin-top: 1%;"></div>
 <%- include('../partials/navigation.ejs') %>
 <main>
-
-
   <input type="text" id="myInput" onkeyup="searchByfirstColumn()" placeholder="Search for names.." title="Type in a name">
 
   <table id="myTable">
@@ -14,7 +12,7 @@
       <th >Guage</th>
       <th >Size</th>
       <th >rate</th>
-      <th ></th>
+      <th >Actions</th>
     </tr>
     <% for(let count = 0; count < rows.length; count++ ){ %>
     <tr>
@@ -24,13 +22,13 @@
       <td> <%= rows[count].dataValues['guage']  %> </td>
       <td> <%= rows[count].dataValues['size']  %> </td>
       <td> <%= rows[count].dataValues['price']  %> </td>
-      <td> <a href="/api/products/<%= rows[count].dataValues['productId'] %>" >edit</a>,
-        <a  href="/api/products/<%= rows[count].dataValues['productId'] %>/delete">delete</a> </td>
+      <td> <a href="/api/products/<%= rows[count].dataValues['productId'] %>" >Edit</a>,
+        <a  href="/api/products/<%= rows[count].dataValues['productId'] %>/delete">Delete</a> </td>
       </tr>
       <% } %>
     </table>
 
   </main>
-
+  
 </body> 
 </html>
