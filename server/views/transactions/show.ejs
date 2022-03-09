@@ -1,0 +1,42 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+  <div class="ui segment">
+  <strong>
+    <p>Name: <%= transaction.name %>  </p>
+    <p>Email: <%= transaction.email %>  </p>
+   </strong>
+   <hr/><br/>
+
+   <table id="myTable">
+    <tr class="header">
+      <th >Name</th>
+      <th >Type</th>
+      <th >Guage</th>
+      <th >Size</th>
+      <th >Quantity</th>
+      <th >Unit Price</th>
+      <th >Total</th>
+    </tr>
+    <% for(let count = 0; count < transaction.data.products.length; count++ ){ %>
+    <tr>
+      <td> <%= transaction.data.products[count]['product']  %> </td>
+      <td> <%= transaction.data.products[count]['productType']  %> </td>
+      <td> <%= transaction.data.products[count]['guage']  %> </td>
+      <td> <%= transaction.data.products[count]['size']  %> </td>
+      <td> <%= transaction.data.products[count]['qty']  %> </td>
+      <td> <%= transaction.data.products[count]['unit_price']  %> </td>
+      <td> <%= transaction.data.products[count]['total']  %> </td>
+      </tr>
+      <% } %>
+      <tr>
+      	<td colspan="6" style="text-align: right" ><strong>Total</strong> </td>
+      	<td  style="text-align: left" ><strong><%= transaction.data.total %></strong> </td>
+      </tr>
+    </table>
+    
+  </div>
+</main>
+</body> 
+</html>

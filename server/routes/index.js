@@ -1,5 +1,6 @@
 const productsController = require('../controllers').products;
 const usersController = require('../controllers').users;
+const transactionsController = require('../controllers').transactions;
 
 module.exports = (app) => {
 
@@ -20,7 +21,7 @@ module.exports = (app) => {
     message: 'Welcome to the Todos API!',
   }));
 
- app.get('/api/products/new',ensureAuthenticated, productsController.newProduct);
+  app.get('/api/products/new',ensureAuthenticated, productsController.newProduct);
   app.post('/api/products',ensureAuthenticated, productsController.create);
   app.get('/api/products', productsController.list);
   app.get('/api/products/:id', productsController.findById);
@@ -33,6 +34,10 @@ module.exports = (app) => {
   app.get('/api/users/', ensureAuthenticated, usersController.index);
   //app.get('/api/users/:id/show', ensureAuthenticated, usersController.current_user);
   app.get('/api/users/:id/drop', usersController.drop);
+
+  app.get('/api/transactions/', transactionsController.list);
+  app.post('/api/transactions/', transactionsController.create);
+  app.get('/api/transactions/:id', transactionsController.show);
 
   app.get('/api/users/logout', ensureAuthenticated, usersController.logout);
 
