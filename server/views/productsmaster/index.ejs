@@ -9,23 +9,15 @@
     <th> Sino </th>
       <th >Name</th>
       <th >Type</th>
-      <th >Weight</th>
-      <th >Guage</th>
-      <th >Size</th>
-      <th >rate</th>
-      <th >Actions</th>
+      <th></th>
     </tr>
     <% for(let count = 0; count < rows.length; count++ ){ %>
     <tr>
       <td><%= count+1 %> </td>
       <td> <%= rows[count].dataValues['product']  %> </td>
       <td> <%= rows[count].dataValues['productType']  %> </td>
-      <td> <%= rows[count].dataValues['weight_based_on_guage']  %> </td>
-      <td> <%= rows[count].dataValues['guage']  %> </td>
-      <td> <%= rows[count].dataValues['size']  %> </td>
-      <td> <%= rows[count].dataValues['price']  %> </td>
-      <td> <a href="/api/products/<%= rows[count].dataValues['productId'] %>" >Edit</a>,
-        <a  href="/api/products/<%= rows[count].dataValues['productId'] %>/delete">Delete</a> </td>
+      <td> <a href="/api/productsmaster/<%= rows[count].dataValues['productId'] %>" >Edit</a>,
+        <a  href="/api/productsmaster/<%= rows[count].dataValues['productId'] %>/delete">Delete</a> </td>
       </tr>
       <% } %>
     </table>

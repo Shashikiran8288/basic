@@ -1,10 +1,16 @@
 const Product = require('../models').Product;
+const ProductMaster = require('../models').Masterhead;
+const lodash = require('lodash');
 
 const { Sequelize } = require('sequelize').Sequelize;
 
 
 const newProduct = function(req, res){
-  res.render('products/new')
+  return ProductMaster.findAll({ attributes: ['name', 'product_type']})
+  .then((productMasters)=>{
+      res.render('products/new', {productMasters: lodash.map(productMasters, function(o) { return lodash.pick(o, ['name', 'product_type']) }) })
+  })
+  .catch(error => res.status(400).send(error.toString()));
 }
 
 
@@ -14,10 +20,10 @@ const create = function(req, res){
   let data = req.body;
   return Product
   .create({
-    name: data.name,
+    name: lodash.first(data.product_name.split("|")),
     size: data.size,
     guage: data.guage,
-    weight_based_on_guage: data.weight_based_on_guage,
+    weight_based_on_guage: lodash.toInteger(data.weight_based_on_guage),
     rate: data.rate,
     product_type: data.product_type
   })
@@ -65,8 +71,14 @@ const findById = function (req, res){
 }
 
 const update = function (req, res){
+let data = {};
+if(req.body.size) data.size = req.body.size;
+if(req.body.guage) data.guage = req.body.guage;
+if(req.body.weight_based_on_guage) data.weight_based_on_guage = lodash.toInteger(req.body.weight_based_on_guage);
+if(req.body.rate) data.rate = Number(req.body.rate);
+
   return Product
-  .update(req.body,{ where: {id: req.params.id} })
+  .update(data,{ where: {id: req.params.id} })
   .then(product =>{
 
     if(req.headers['content-type'] == 'application/json'){

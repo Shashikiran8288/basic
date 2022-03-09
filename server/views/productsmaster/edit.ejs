@@ -1,0 +1,38 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+
+
+  <h1> Edit Product </h1>
+  <form action="/api/productsmaster/<%=product.dataValues['productId'] %>/update" method="post">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name"  value="<%= product.dataValues['product'] %>" />
+
+    </div>
+
+    <div>
+      <label for="product_type">Product Type</label> 
+      <select name="product_type" placeholder="Enter Product Type" required> 
+        <% if(product.dataValues['productType'] == 'rod') { %>
+          <option value="rod"  selected  >rod</option>
+          <option value="non-rod"   >non-rod</option>
+        <% } else { %>
+          <option value="rod"  >rod</option>
+          <option value="non-rod"  selected >non-rod</option>
+        <% }%>
+      </select>
+    </div>
+
+
+    
+
+    <button type="submit" class="btn btn-primary btn-block mt-4">Save Edited</button>
+
+  </form>
+
+</main>
+
+</body> 
+</html>

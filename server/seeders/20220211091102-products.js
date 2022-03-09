@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    var data = [], raw_data = [
+    var data = [], masterdata = [], raw_data = [
       {
           product: "ROUND TUBES",
           productId: '1',
@@ -7348,6 +7348,7 @@ module.exports = {
 
   raw_data.forEach(function (object, index) {
     var temp = { name: object.product, product_type: object.productType };
+    masterdata.push({ name: object.product, product_type: object.productType });
     object.sizes.forEach(function (variant, index) {
         temp.guage = variant.guage;
         variant.size.forEach(function (item, index) {
@@ -7359,12 +7360,18 @@ module.exports = {
     });
   });
 
-  return queryInterface.bulkInsert('Products', [...new Set(data)], {});
+  return Promise.all([
+      queryInterface.bulkInsert('Masterheads', [...new Set(masterdata)], {}),
+      queryInterface.bulkInsert('Products', [...new Set(data)], {})
+    ]).then(()=>{ resolve(true) }).catch((error)=>{ console.log(error) });
   // duplicate data also included if following line uncommented while running this seed file
   // return queryInterface.bulkInsert('Products', data, {});
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Products', null, {});
+    return Promise.all([
+      queryInterface.bulkDelete('Masterheads', null, {}),
+      queryInterface.bulkDelete('Products', null, {})
+    ]).then(()=>{ resolve(true) }).catch((error)=>{ console.log(error) });
   }
 };

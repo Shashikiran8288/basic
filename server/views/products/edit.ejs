@@ -8,17 +8,14 @@
   <form action="/api/products/<%=product.dataValues['productId'] %>/update" method="post">
     <div>
       <label for="name">Name</label>
-      <input type="text" name="name" placeholder="Enter Name" required value="<%= product.dataValues['product'] %>"/>
+      <input type="hidden" id="name" name="name"  value="<%= product.dataValues['product'] %>" />
+      <input type="text" name="product_name" placeholder="Enter Name"  value="<%= product.dataValues['product'] %>" disabled/>
     </div>
     <div>
       <label for="product_type">Product Type</label>
 
-      <select name="product_type" placeholder="Enter Product Type" required>
-
-        <option value="rod" selected="<%= product.dataValues['product']? true : null %>"  >rod</option>
-        <option value="non-rod" selected="<%= product.dataValues['product']? true : null %>" >non-rod</option>
-
-      </select>
+      <input type="text" id="type" name="type" placeholder="Enter  Product Type" value="<%= product.dataValues['productType'] %>"  disabled/>
+      <input type="hidden" id="product_type" name="product_type" value="<%= product.dataValues['productType'] %>" />
 
     </div>
 

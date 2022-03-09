@@ -7,6 +7,7 @@
     <input type="text" id="myInput" onkeyup="searchByfirstColumn()" placeholder="Search for names.." title="Type in a name">
     <table id="myTable">
       <tr class="header">
+      <th>Si no</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -14,6 +15,7 @@
       </tr>
       <% for(let count = 0; count < users.length; count++ ){ %>
       <tr>
+        <td> <%= count+1 %> </td>
         <td> <%= users[count]['first_name']  %> </td>
         <td> <%= users[count]['last_name']  %> </td>
         <td> <%= users[count]['email']  %> </td>

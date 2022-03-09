@@ -8,17 +8,18 @@
 
   <table id="myTable">
     <tr class="header">
-      <th >Data</th>
+      <th >Sino</th>
       <th >Name</th>
       <th >Email</th>
-
+      <th > Generated At</th>
       <th ></th>
     </tr>
     <% for(let count = 0; count < transactions.length; count++ ){ %>
     <tr>
-      <td> <%= transactions[count].dataValues['data']  %>  </td>
+      <td> <%= count+1  %>  </td>
       <td> <%= transactions[count].dataValues['name']  %> </td>
       <td> <%= transactions[count].dataValues['email']  %> </td>
+      <td> <%= transactions[count].dataValues['createdAt']  %> </td>
       <td> 
         <a  href="/api/transactions/<%= transactions[count].dataValues['id'] %>">show</a> </td>
       </tr>

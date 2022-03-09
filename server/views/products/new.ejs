@@ -3,23 +3,23 @@
 <%- include('../partials/navigation.ejs') %>
 <main>
 
-
-
   <h1> New Product </h1>
   <form action="/api/products" method="POST">
     <div>
       <label for="name">Name</label>
-      <input type="text" name="name" placeholder="Enter Name" required/>
+      <select name="product_name" id="product_name" onchange="setProductType(this)" required>
+         <option value="" selected >Select Product Name</option>
+      <% productMasters.forEach(function(product) { %>
+              <option name = "<%= product.name %>|<%= product.product_type %>" value="<%=product.name %>|<%= product.product_type %>"><%= product.name %></option>
+              <% })%>
+      </select>
+
     </div>
     <div>
       <label for="product_type">Product Type</label>
 
-      <select name="product_type" placeholder="Enter Product Type" required>
-        <option value="" selected >Select Product Type</option>
-        <option value="rod">rod</option>
-        <option value="non-rod">non-rod</option>
-
-      </select>
+      <input type="text" id="type" name="type" placeholder="Enter  Product Type" disabled/>
+      <input type="hidden" id="product_type" name="product_type"/>
 
     </div>
 

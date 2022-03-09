@@ -1,0 +1,23 @@
+
+for initial set up 
+
+sequelize db:create
+
+sequelize db:migrate
+
+sequelize db:seed:all
+
+incase if u need to revert do "sequelize db:migrate:undo:all "
+
+for project execution:  npm run start:dev
+
+
+
+
+For sending email follow the steps
+
+1. To enable it you need to go to https://myaccount.google.com/ and select your Google Account. Then go to Security 	in the left sidebar and search by "Less secure app access".
+
+	Turn on and run the code again. It should work fine and you'll see a true in your terminal.
+
+2. .env file set SENDMAIL = ON, then restart th server . now you can send a mail
