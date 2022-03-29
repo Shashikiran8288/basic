@@ -20,12 +20,12 @@ const create = function(req, res){
   let data = req.body;
   return Product
   .create({
-    name: lodash.first(data.product_name.split("|")),
-    size: data.size,
-    guage: data.guage,
+    name: lodash.first(data.product_name.split("|")).toLowerCase(),
+    size: data.size.toLowerCase(),
+    guage: data.guage.toLowerCase(),
     weight_based_on_guage: lodash.toInteger(data.weight_based_on_guage),
     rate: data.rate,
-    product_type: data.product_type
+    product_type: data.product_type.toLowerCase()
   })
   .then((product) =>{
     if(req.headers['content-type'] == 'application/json'){
@@ -42,7 +42,7 @@ const list = function (req, res) {
 
   console.log(req.headers);
 
-  let totalCount = 0;
+  let totalCount = 0, pagenum = req.query.offset?  parseInt(req.query.offset/req.query.limit):0;
   Product.count()
   .then((count)=>{
     totalCount = count;
@@ -50,10 +50,10 @@ const list = function (req, res) {
   })
   .then((result) =>{
     if(req.headers['content-type'] == 'application/json'){
-      res.status(200).send({ count: totalCount, rows: result })
+      res.status(200).send({ count: totalCount, rows: result, pagenum:pagenum })
     }
     else
-    res.render('products/index',{ count: totalCount, rows: result })
+    res.render('products/index',{ count: totalCount, rows: result, pagenum:pagenum })
   })
   .catch(error => res.status(400).send(error.toString()));
 }
@@ -72,8 +72,8 @@ const findById = function (req, res){
 
 const update = function (req, res){
 let data = {};
-if(req.body.size) data.size = req.body.size;
-if(req.body.guage) data.guage = req.body.guage;
+if(req.body.size) data.size = req.body.size.toLowerCase();
+if(req.body.guage) data.guage = req.body.guage.toLowerCase();
 if(req.body.weight_based_on_guage) data.weight_based_on_guage = lodash.toInteger(req.body.weight_based_on_guage);
 if(req.body.rate) data.rate = Number(req.body.rate);
 

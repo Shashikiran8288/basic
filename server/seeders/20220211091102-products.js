@@ -7346,19 +7346,23 @@ module.exports = {
       },
   ];
 
-  raw_data.forEach(function (object, index) {
-    var temp = { name: object.product, product_type: object.productType };
-    masterdata.push({ name: object.product, product_type: object.productType });
-    object.sizes.forEach(function (variant, index) {
-        temp.guage = variant.guage;
-        variant.size.forEach(function (item, index) {
-            temp.size = item.size;
-            temp.weight_based_on_guage = item.weight;
-            temp.rate = item.price;
-            data.push(temp);
-        });
-    });
-  });
+  for(var i = 0; i < raw_data.length; i++ ){
+    masterdata.push({ name: raw_data[i].product.toLowerCase(), product_type: raw_data[i].productType.toLowerCase() })
+
+    for(var j = 0; j < raw_data[i]['sizes'].length; j++ ){
+    
+    for(var k = 0; k < raw_data[i]['sizes'][j]['size'].length; k++ ){
+      data.push({
+        name: raw_data[i].product.toLowerCase(),
+        product_type: raw_data[i].productType.toLowerCase(),
+        guage: raw_data[i]['sizes'][j].guage.toLowerCase(),
+        size: raw_data[i]['sizes'][j]['size'][k].size.toLowerCase(),
+        weight_based_on_guage: raw_data[i]['sizes'][j]['size'][k].weight,
+        rate: raw_data[i]['sizes'][j]['size'][k].price
+      })
+      }
+    }
+  }
 
   return Promise.all([
       queryInterface.bulkInsert('Masterheads', [...new Set(masterdata)], {}),

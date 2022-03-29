@@ -28,6 +28,19 @@
         <a  href="/api/products/<%= rows[count].dataValues['productId'] %>/delete">Delete</a> </td>
       </tr>
       <% } %>
+      <tr>
+      <td colspan="8">
+      <input type='hidden' id="totalcount" value=<%= count%> >
+        <% let per_page=5000, total_page =  parseInt(count/per_page); %>
+        <div class="pagination">
+          <a href="/api/products?offset=0&limit=<%= per_page %>">&laquo;</a>
+        <%  for(let i = 0; i <= total_page; i++ ){ %>
+              <a class= "<%= parseInt(pagenum) == i ? 'active':''%>" href="/api/products?offset=<%= per_page * i %>&limit=<%= per_page %>" > <%= i+1 %></a>
+         <% } %>
+         <a href="/api/products?offset=<%= total_page * per_page  %>&limit=<%= per_page %>">&raquo;</a>
+        </div>
+      </td>
+      </tr>
     </table>
 
   </main>
