@@ -16,6 +16,8 @@ app.use(cors());
 // Log requests to the console.
 app.use(logger('dev'));
 
+app.use(express.static('server/public'));
+
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
