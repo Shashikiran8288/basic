@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin-top: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+  <!-- <input type="text" id="myInput" onkeyup="searchByfirstColumn()" placeholder="Search for names.." title="Type in a name"> -->
+<br/>
+  <table id="myTable">
+    <tr class="header">
+    <th> Sino </th>
+      <th >Product Name</th>
+      <th >Type</th>
+      <th >Guage</th>
+      <th >Size</th>
+      <th >Weight in kgs</th>
+      <th >Remaining in Qty</th>
+      <th >Remaining in kgs</th>
+      <th >Actions</th>
+    </tr>
+    <% for(let count = 0; count < rows.length; count++ ){ %>
+    <tr>
+      <td><%= count+1 %> </td>
+      <% let details = rows[count].dataValues['description'].split('|') %>
+      <td> <%= details[1]  %> </td>
+      <td> <%= details[2]  %> </td>
+      <td> <%=details[3]  %> </td>
+      <td> <%= details[4]  %> </td>
+      <td> <%= details[5]  %> </td>
+      <td> <%= rows[count].dataValues['qty']  %> </td>
+      <td> <%= rows[count].dataValues['weight_kgs']  %> </td>
+      <td> <a href="/api/inventories/new %>" >Add</a>
+        </td>
+      </tr>
+      <% } %>
+      <tr>
+      <td colspan="9">
+      <input type='hidden' id="totalcount" value=<%= count%> >
+        <% let per_page=5000, total_page =  parseInt(count/per_page); %>
+        <div class="pagination">
+          <a href="/api/inventories?offset=0&limit=<%= per_page %>">&laquo;</a>
+        <%  for(let i = 0; i <= total_page; i++ ){ %>
+              <a class= "<%= parseInt(pagenum) == i ? 'active':''%>" href="/api/inventories?offset=<%= per_page * i %>&limit=<%= per_page %>" > <%= i+1 %></a>
+         <% } %>
+         <a href="/api/inventories?offset=<%= total_page * per_page  %>&limit=<%= per_page %>">&raquo;</a>
+        </div>
+      </td>
+      </tr>
+    </table>
+
+  </main>
+  
+</body> 
+</html>

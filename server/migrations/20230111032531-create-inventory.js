@@ -18,6 +18,9 @@ module.exports = {
       weight_kgs: {
         type: Sequelize.INTEGER
       },
+      description: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

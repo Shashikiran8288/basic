@@ -2,6 +2,7 @@ const productsMasterController = require('../controllers').productsmaster;
 const productsController = require('../controllers').products;
 const usersController = require('../controllers').users;
 const transactionsController = require('../controllers').transactions;
+const inventoriesController = require('../controllers').inventories;
 
 module.exports = (app) => {
 
@@ -48,5 +49,13 @@ module.exports = (app) => {
   app.get('/api/transactions/:id', transactionsController.show);
 
   app.get('/api/users/logout', ensureAuthenticated, usersController.logout);
+
+
+  app.get('/api/inventories/new',ensureAuthenticated, inventoriesController.newProduct);
+  app.post('/api/inventories',ensureAuthenticated, inventoriesController.create);
+  app.get('/api/inventories', inventoriesController.list);
+  // app.get('/api/products/:id', productsController.findById);
+  // app.post('/api/products/:id/update',ensureAuthenticated, productsController.update);
+  // app.get('/api/products/:id/delete', ensureAuthenticated, productsController.destory);
 
 };

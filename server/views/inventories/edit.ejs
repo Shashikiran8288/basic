@@ -1,0 +1,49 @@
+<%- include('../partials/header.ejs') %>
+<div style="margin: 1%;"></div>
+<%- include('../partials/navigation.ejs') %>
+<main>
+
+
+  <h1> Edit Product </h1>
+  <form action="/api/products/<%=product.dataValues['productId'] %>/update" method="post">
+    <div>
+      <label for="name">Name</label>
+      <input type="hidden" id="name" name="name"  value="<%= product.dataValues['product'] %>" />
+      <input type="text" name="product_name" placeholder="Enter Name"  value="<%= product.dataValues['product'] %>" disabled/>
+    </div>
+    <div>
+      <label for="product_type">Product Type</label>
+
+      <input type="text" id="type" name="type" placeholder="Enter  Product Type" value="<%= product.dataValues['productType'] %>"  disabled/>
+      <input type="hidden" id="product_type" name="product_type" value="<%= product.dataValues['productType'] %>" />
+
+    </div>
+
+    <div>
+      <label for="size">Size</label>
+      <input type="text" name="size" placeholder="Enter Size" value="<%= product.dataValues['size'] %>" required/>
+    </div>
+
+    <div>
+      <label for="name">Guage</label>
+      <input type="text" name="guage" placeholder="Enter Guage" value="<%= product.dataValues['guage'] %>" required/>
+    </div>
+    <div>
+      <label for="weight_based_on_guage">Weight</label>
+      <input type="text" name="weight_based_on_guage" placeholder="Enter Weight  based on Guage" value="<%= product.dataValues['weight_based_on_guage'] %>" required/>
+    </div>
+
+    <div>
+      <label for="name">Rate</label>
+      <input type="text" name="rate" placeholder="Enter Rate" value="<%= product.dataValues['price'] %>" required/>
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary btn-block mt-4">Save Edited</button>
+
+  </form>
+
+</main>
+
+</body> 
+</html>

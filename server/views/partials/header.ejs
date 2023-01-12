@@ -371,7 +371,12 @@ select::-ms-expand {
     document.getElementById('product_type').value = document.getElementById('type').value = type[1];
   }
 
-
+  function setProductDetails(product){
+    var type = product.value.split("|");
+    document.getElementById('pr_guage').value =  type[4];
+    document.getElementById('pr_size').value = type[3];
+    document.getElementById('product_id').value =type[0];
+  }
 
 
 </script>
